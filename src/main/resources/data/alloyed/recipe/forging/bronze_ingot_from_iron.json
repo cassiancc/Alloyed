@@ -1,0 +1,48 @@
+{
+  "type": "alloyed:forging",
+  "ingredients": [
+    "minecraft:copper_ingot",
+    "minecraft:iron_nugget",
+    "minecraft:iron_nugget",
+    "minecraft:iron_nugget",
+    "minecraft:fire_charge"
+  ],
+  "result": {
+      "id": "alloyed:bronze_ingot"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:tags_populated",
+        "registry": "minecraft:item",
+        "values": [
+          "c:nuggets/zinc"
+        ]
+      }
+    },
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:tags_populated",
+        "registry": "minecraft:item",
+        "values": [
+          "c:nuggets/tin"
+        ]
+      }
+    }
+  ],
+  "neoforge_conditions":{
+    "type": "neoforge:and",
+    "values": [
+      {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/tin"
+      },
+      {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/zinc"
+      }
+    ]
+  }
+}

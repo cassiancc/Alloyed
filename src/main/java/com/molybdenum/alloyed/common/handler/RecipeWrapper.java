@@ -103,6 +103,9 @@ public class RecipeWrapper implements RecipeInput {
 	}
 
 	public List<ItemStack> stacks() {
+		//? neoforge
+		/*return this.handler.getSlots();*/
+		//? fabric
 		return stacks;
 	}
 }
