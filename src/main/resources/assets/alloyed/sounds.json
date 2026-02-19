@@ -1,7 +1,17 @@
 {
   "bronze_bell": {
+    "subtitle": "alloyed.subtitles.bronze_bell.ring",
     "sounds": [
       "alloyed:bronze_bell"
+    ]
+  },
+  "forge_crackle": {
+    "subtitle": "alloyed.subtitles.forge.crackle",
+    "sounds": [
+      {
+        "name": "block.blastfurnace.fire_crackle",
+        "type": "event"
+      }
     ]
   }
 }

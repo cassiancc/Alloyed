@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/cassiancc/Create-Alloyed/issues"
 [[mods]]
 modId="alloyed"
 version = "${version}"
-displayName="Create: Alloyed"
+displayName="Alloyed"
 #updateJSONURL="http://myurl.me/"
 displayURL="https://github.com/cassiancc/Create-Alloyed"
 logoFile="alloyed.png"
