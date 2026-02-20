@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "com.molybdenum.alloyed.mixin.AlloyedMixinPlugin",
   "mixins": [
+    "FoxMixin",
     "create.BeltBlockEntityMixin",
     "create.BeltBlockMixin",
     "create.BeltModelMixin",
