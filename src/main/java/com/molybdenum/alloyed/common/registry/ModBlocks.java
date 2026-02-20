@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,7 +72,10 @@ public class ModBlocks {
     public static final BlockEntry<TrapDoorBlock> STEEL_TRAPDOOR = registerBlock("steel_trapdoor", properties -> new TrapDoorBlock(ModBlockSetTypes.STEEL, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR));
 
     public static final BlockEntry<FenceBlock> STEEL_MESH_FENCE = registerBlock("steel_mesh_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.CHAIN));
-    public static final BlockEntry<ForgeBlock> FORGE = registerBlock("forge", ForgeBlock::new);
+    public static final BlockEntry<ForgeBlock> FORGE = registerBlock("forge", ForgeBlock::new, BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(4f).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().lightLevel(state->{
+        if (state.getValue(ForgeBlock.LIT)) return 13;
+        return 0;
+    }));
 
 
     public static void register() {
