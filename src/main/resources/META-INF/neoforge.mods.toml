@@ -12,7 +12,7 @@ logoFile="alloyed.png"
 credits="Original mod by Fortress Nebula, SpottyTheTurtle, and Bagels. Textures since 2.0 by asof."
 authors="cassiancc, asof, Bagels"
 description='''
-A Create addon adding Bronze and Steel, both items used for compatibility and decoration!
+A mod adding Bronze and Steel, crafted in a Forge and used for compatibility and decoration!
 '''
 
 [[dependencies.alloyed]]
