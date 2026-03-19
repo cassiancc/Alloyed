@@ -71,7 +71,7 @@ public class ModBlocks {
 
     public static final BlockEntry<TrapDoorBlock> STEEL_TRAPDOOR = registerBlock("steel_trapdoor", properties -> new TrapDoorBlock(ModBlockSetTypes.STEEL, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR));
 
-    public static final BlockEntry<FenceBlock> STEEL_MESH_FENCE = registerBlock("steel_mesh_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.CHAIN));
+    public static final BlockEntry<FenceBlock> STEEL_MESH_FENCE = registerBlock("steel_mesh_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.CHAIN), !Platform.isLoaded("createdeco"));
     public static final BlockEntry<ForgeBlock> FORGE = registerBlock("forge", ForgeBlock::new, BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(4f).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().lightLevel(state->{
         if (state.getValue(ForgeBlock.LIT)) return 13;
         return 0;
@@ -185,13 +185,17 @@ public class ModBlocks {
         return registerBlock(id, factory, settings, true);
     }
 
-    public static <T extends Block> BlockEntry<T> registerBlock(String id, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties settings, boolean b) {
+    public static <T extends Block> BlockEntry<T> registerBlock(String id, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties settings, boolean registerBlockItem) {
+        return registerBlock(id, factory, settings, registerBlockItem, false);
+    }
+
+    public static <T extends Block> BlockEntry<T> registerBlock(String id, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties settings, boolean registerBlockItem, boolean hideFromCreative) {
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MOD_ID, id));
         T block = factory.apply(settings.setId(key));
         var entry = Registry.register(BuiltInRegistries.BLOCK, key, block);
         BlockEntry<T> tBlockEntry = new BlockEntry<>(key.identifier(), entry);
-        if (b)
-            ModItems.registerBlockItem(tBlockEntry);
+        if (registerBlockItem)
+            ModItems.registerBlockItem(tBlockEntry, hideFromCreative);
         return tBlockEntry;
     }
 
