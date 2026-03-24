@@ -1,5 +1,6 @@
 package com.molybdenum.alloyed.common.integration.rrv;
 
+import cc.cassian.rrv.api.ActionType;
 import cc.cassian.rrv.api.recipe.ReliableClientRecipe;
 import cc.cassian.rrv.common.recipe.inventory.RecipeViewMenu;
 import cc.cassian.rrv.common.recipe.inventory.RecipeViewScreen;
@@ -7,7 +8,7 @@ import cc.cassian.rrv.common.recipe.inventory.SlotContent;
 import com.molybdenum.alloyed.client.screen.ForgeScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -89,19 +90,19 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
         this.ingredients.forEach(slotFillContext::bindSlot);
 
         SlotContent slotContent = SlotContent.of(Items.COAL);
-        slotContent.setType(SlotContent.Type.RESULT);
+        slotContent.setType(ActionType.RESULT);
         slotFillContext.bindOptionalSlot(9, slotContent, RecipeViewMenu.OptionalSlotRenderer.DEFAULT);
         slotFillContext.addAdditionalStackModifier(9, (stack, components) -> {
             components.set(0, Component.translatable("rrv.cooking.furnace_fuel"));
         });;
 
         var result = SlotContent.of(this.result);
-        result.setType(SlotContent.Type.RESULT);
+        result.setType(ActionType.RESULT);
         slotFillContext.bindSlot(10, result);
     }
 
     @Override
-    public void renderRecipe(RecipeViewScreen screen, RecipePosition recipePosition, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void renderRecipe(RecipeViewScreen screen, RecipePosition recipePosition, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
         int i = 9;
         int x = 37;
         int y = 38;
@@ -126,7 +127,7 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
         }
     }
 
-    protected void drawCookTime(int cookTime, GuiGraphics guiGraphics, int x, int y) {
+    protected void drawCookTime(int cookTime, GuiGraphicsExtractor guiGraphics, int x, int y) {
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
             Component timeString = Component.translatable("rrv.cooking.time", cookTimeSeconds);

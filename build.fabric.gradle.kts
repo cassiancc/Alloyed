@@ -170,7 +170,10 @@ dependencies {
         exclude(group = "net.fabricmc")
     }
 
-    implementation("cc.cassian.rrv:reliable-recipe-viewer-fabric:${property("deps.rrv")}")
+    implementation("cc.cassian.rrv:reliable-recipe-viewer-fabric:${property("deps.rrv")}") {
+        exclude(group = "eu.pb4")
+
+    }
 
     // Mod Menu
     implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")

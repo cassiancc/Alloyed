@@ -2,7 +2,7 @@ package com.molybdenum.alloyed.client.screen;
 
 import com.molybdenum.alloyed.Alloyed;
 import com.molybdenum.alloyed.common.screen.ForgeMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public class ForgeScreen extends AbstractContainerScreen<ForgeMenu> {
 	}
 
 	@Override
-	protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
 		// Get the position where the GUI is to be drawn
 		int x = (width - imageWidth) / 2;
 		int y = (height - imageHeight) / 2;
@@ -37,10 +37,10 @@ public class ForgeScreen extends AbstractContainerScreen<ForgeMenu> {
 	}
 
 	@Override
-	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-		this.renderBg(guiGraphics, delta, mouseX, mouseY);
-		super.render(guiGraphics, mouseX, mouseY, delta);
-		this.renderTooltip(guiGraphics, mouseX, mouseY);
+	public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float delta) {
+		this.extractBackground(guiGraphics, mouseX, mouseY, delta);
+		super.extractRenderState(guiGraphics, mouseX, mouseY, delta);
+		this.extractTooltip(guiGraphics, mouseX, mouseY);
 	}
 
 }
