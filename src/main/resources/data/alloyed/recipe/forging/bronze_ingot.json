@@ -1,16 +1,15 @@
 {
   "type": "alloyed:forging",
   "ingredients": [
-    "minecraft:iron_ingot",
-    "minecraft:iron_ingot",
-    "minecraft:iron_ingot",
-    "#minecraft:coals",
-    "minecraft:fire_charge"
+    {"item": "minecraft:copper_ingot"},
+    {"item": "minecraft:iron_nugget"},
+    {"item": "minecraft:iron_nugget"},
+    {"item": "minecraft:iron_nugget"},
+    {"item": "minecraft:fire_charge"}
   ],
   "result":
     {
-      "count": 3,
-      "id": "alloyed:steel_ingot"
+      "id": "alloyed:bronze_ingot"
     }
   ,
   "fabric:load_conditions": [
