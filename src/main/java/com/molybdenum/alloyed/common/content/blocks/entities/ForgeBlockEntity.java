@@ -287,6 +287,16 @@ public class ForgeBlockEntity extends BlockEntity implements
 
 		}
 	}
+
+	private static ItemStack remainder(ItemStack slotStack) {
+		//? fabric
+		ItemStack recipeRemainder = slotStack.getRecipeRemainder();
+		//? neoforge
+		/*ItemStack recipeRemainder = slotStack.getCraftingRemainingItem();*/
+		if (recipeRemainder == null) return ItemStack.EMPTY;
+		return recipeRemainder;
+	}
+
 	public static void spawnItemEntity(Level level, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {
 		ItemEntity entity = new ItemEntity(level, x, y, z, stack);
 		entity.setDeltaMovement(xMotion, yMotion, zMotion);

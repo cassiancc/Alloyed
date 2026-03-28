@@ -5,6 +5,7 @@
 		"1": "alloyed:block/ladder_steel",
 		"particle": "alloyed:block/ladder_steel"
 	},
+	"render_type": "cutout",
 	"elements": [
 		{
 			"name": "ladder",
