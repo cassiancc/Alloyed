@@ -29,6 +29,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -235,7 +236,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 					fuel.setCount(fuel.getCount()-1);
 					this.itemHandler.setStackInSlot(9, fuel);
 				} else {
-					this.itemHandler.setStackInSlot(9, fuel.getCraftingRemainder().create());
+					this.itemHandler.setStackInSlot(9, remainder(fuel));
 				}
 				return true;
 			}
@@ -271,7 +272,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 					double x = (double)entity.worldPosition.getX() + 0.5 + (double)direction.getStepX() * 0.25;
 					double y = (double)entity.worldPosition.getY() + 0.7;
 					double z = (double)entity.worldPosition.getZ() + 0.5 + (double)direction.getStepZ() * 0.25;
-					spawnItemEntity(entity.level, entity.itemHandler.getStackInSlot(i).getCraftingRemainder().create(), x, y, z, (float)direction.getStepX() * 0.08F, 0.25, (float)direction.getStepZ() * 0.08F);
+					spawnItemEntity(entity.level, remainder(entity.itemHandler.getStackInSlot(i)), x, y, z, (float)direction.getStepX() * 0.08F, 0.25, (float)direction.getStepZ() * 0.08F);
 				}
 			}
 
@@ -289,12 +290,9 @@ public class ForgeBlockEntity extends BlockEntity implements
 	}
 
 	private static ItemStack remainder(ItemStack slotStack) {
-		//? fabric
-		ItemStack recipeRemainder = slotStack.getRecipeRemainder();
-		//? neoforge
-		/*ItemStack recipeRemainder = slotStack.getCraftingRemainingItem();*/
+		ItemStackTemplate recipeRemainder = slotStack.getCraftingRemainder();
 		if (recipeRemainder == null) return ItemStack.EMPTY;
-		return recipeRemainder;
+		return recipeRemainder.create();
 	}
 
 	public static void spawnItemEntity(Level level, ItemStack stack, double x, double y, double z, double xMotion, double yMotion, double zMotion) {

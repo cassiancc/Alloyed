@@ -3,6 +3,7 @@ package com.molybdenum.alloyed.common.integration.rrv;
 import cc.cassian.rrv.api.TagUtil;
 import cc.cassian.rrv.api.recipe.ReliableServerRecipe;
 import cc.cassian.rrv.api.recipe.ReliableServerRecipeType;
+import cc.cassian.rrv.common.recipe.inventory.SlotContent;
 import com.molybdenum.alloyed.Alloyed;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -20,11 +21,11 @@ public class ShapedForgingServerRecipe implements ReliableServerRecipe {
     );
 	private int width;
 	private int height;
-	private HashMap<Integer, Ingredient> ingredients;
+	private HashMap<Integer, SlotContent> ingredients;
     private ItemStack resultItem;
     private int cookTime;
 
-    public ShapedForgingServerRecipe(int width, int height, HashMap<Integer, Ingredient> ingredients, ItemStack resultItem, int cookTime) {
+    public ShapedForgingServerRecipe(int width, int height, HashMap<Integer, SlotContent> ingredients, ItemStack resultItem, int cookTime) {
 		this.width = width;
 		this.height = height;
 		this.ingredients = ingredients;
@@ -36,7 +37,7 @@ public class ShapedForgingServerRecipe implements ReliableServerRecipe {
     public void writeToTag(CompoundTag tag) {
         tag.putInt("width", this.width);
         tag.putInt("height", this.height);
-        this.ingredients.forEach((slotId, ingredient) -> tag.put("ci_" + slotId, TagUtil.writeIngredient(ingredient)));
+        this.ingredients.forEach((slotId, ingredient) -> tag.put("ci_" + slotId, TagUtil.writeSlotContent(ingredient)));
         tag.put("result", TagUtil.encodeItemStackOnServer(resultItem));
         tag.putInt("cookingtime", cookTime);
     }
@@ -45,11 +46,11 @@ public class ShapedForgingServerRecipe implements ReliableServerRecipe {
     public void loadFromTag(CompoundTag tag) {
         this.width = tag.getIntOr("width", 0);
         this.height = tag.getIntOr("height", 0);
-        HashMap<Integer, Ingredient> ingredients = new HashMap<>();
+        HashMap<Integer, SlotContent> ingredients = new HashMap<>();
         tag.keySet().forEach((key) -> {
             if (key.startsWith("ci_")) {
                 int slot = Integer.parseInt(key.replace("ci_", ""));
-                ingredients.put(slot, TagUtil.readIngredient((CompoundTag)tag.getCompound(key).orElseGet(CompoundTag::new)));
+                ingredients.put(slot, TagUtil.readSlotContent(tag.getCompound(key).orElseGet(CompoundTag::new)));
             }
         });
         this.ingredients = ingredients;
@@ -62,7 +63,7 @@ public class ShapedForgingServerRecipe implements ReliableServerRecipe {
         return TYPE;
     }
 
-    public HashMap<Integer, Ingredient> getIngredients() {
+    public HashMap<Integer, SlotContent> getIngredients() {
         return this.ingredients;
     }
 

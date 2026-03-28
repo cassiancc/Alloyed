@@ -3,6 +3,7 @@ package com.molybdenum.alloyed.common.integration.rrv;
 import cc.cassian.rrv.api.ReliableRecipeViewerPlugin;
 import cc.cassian.rrv.api.recipe.ItemView;
 import cc.cassian.rrv.common.recipe.ServerRecipeManager;
+import cc.cassian.rrv.common.recipe.inventory.SlotContent;
 import com.molybdenum.alloyed.common.content.recipes.ModRecipes;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -10,13 +11,16 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
-	public static void init() {
+
+	@Override
+	public void onIntegrationInitialize() {
+		//server
 		ItemView.addServerRecipeProvider(recipeList -> {
 			ServerRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPELESS_FORGING_TYPE.get()).forEach(recipe -> {
 				recipeList.add(new ShapelessForgingServerRecipe(recipe.getIngredients(), recipe.getResultItem(), recipe.getCookTime()));
 			});
 			ServerRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPED_FORGING_TYPE.get()).forEach(recipe -> {
-				HashMap<Integer, Ingredient> ingredients = new HashMap<>();
+				HashMap<Integer, SlotContent> ingredients = new HashMap<>();
 
 				int i = 0;
 				for (int y = 0; y < 3; y++) {
@@ -27,7 +31,7 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 						}
 
 						if (recipe.getIngredients().get(i).isPresent())
-							ingredients.put(x + y * 3, recipe.getIngredients().get(i).get());
+							ingredients.put(x + y * 3, SlotContent.of(recipe.getIngredients().get(i).get()));
 
 						i++;
 					}
@@ -36,16 +40,9 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 			});
 		});
 
-		ItemView.addClientRecipeWrapper(ShapelessForgingServerRecipe.TYPE, modRecipe -> {
-			return Collections.singletonList(new ForgingClientRecipe(modRecipe));
-		});
-		ItemView.addClientRecipeWrapper(ShapedForgingServerRecipe.TYPE, modRecipe -> {
-			return Collections.singletonList(new ForgingClientRecipe(modRecipe));
-		});
-	}
+		// client
+		ItemView.addClientRecipeWrapper(ShapelessForgingServerRecipe.TYPE, modRecipe -> Collections.singletonList(new ForgingClientRecipe(modRecipe)));
+		ItemView.addClientRecipeWrapper(ShapedForgingServerRecipe.TYPE, modRecipe -> Collections.singletonList(new ForgingClientRecipe(modRecipe)));
 
-	@Override
-	public void onIntegrationInitialize() {
-		init();
 	}
 }

@@ -72,9 +72,6 @@ public class NeoForgeEntrypoint {
 
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		CommonEventsHandler.setupCommon();
-		if (ModList.get().isLoaded("rrv")) {
-			AlloyedRRVPlugin.init();
-		}
 	}
 
 	public static void packSetup(AddPackFindersEvent event) {

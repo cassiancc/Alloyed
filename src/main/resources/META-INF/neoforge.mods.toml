@@ -14,6 +14,7 @@ authors="cassiancc, asof, Bagels"
 description='''
 A mod adding Bronze and Steel, crafted in a Forge and used for compatibility and decoration!
 '''
+"rrv"="com.molybdenum.alloyed.common.integration.rrv.AlloyedRRVPlugin"
 
 [[dependencies.alloyed]]
 modId="neoforge"

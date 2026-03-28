@@ -15,13 +15,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import static cc.cassian.rrv.common.builtin.BuiltInReliableRecipeViewerIntegration.DEFAULT_SLOT_TEXTURE;
 
@@ -70,14 +67,14 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
 
         AtomicInteger i = new AtomicInteger();
         recipe.getIngredients().forEach((ingredient) -> {
-            this.ingredients.put(i.getAndIncrement(), SlotContent.of(ingredient));
+            this.ingredients.put(i.getAndIncrement(), ingredient);
         });
         this.cookTime = recipe.getCookTime();
         this.result = recipe.getResult();
     }
 
     public ForgingClientRecipe(ShapedForgingServerRecipe recipe) {
-        recipe.getIngredients().forEach((slotId, ingredient) -> this.ingredients.put(slotId, SlotContent.of(ingredient)));
+		this.ingredients.putAll(recipe.getIngredients());
         this.cookTime = recipe.getCookTime();
         this.result = recipe.getResult();
         this.shapeless = false;
