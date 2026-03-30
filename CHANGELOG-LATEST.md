@@ -1,5 +1,5 @@
+### Added
+- When Always a Bigger Fish is present, Steel Fishing Rods now work as baited rods.
+
 ### Fixed
-- Load conditions on NeoForge.
-- Shapeless forging recipes not showing up in EMI.
-- Missing render type for Steel Ladders on NeoForge.
-- Crash when the Forge runs out of fuel.
+- Steel Knives, Shears, and Fishing Rods now have a repair ingredient.

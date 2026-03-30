@@ -151,6 +151,8 @@ dependencies {
 
     compileOnly("maven.modrinth:create-deco:${property("deps.create_deco")}")
 
+    implementation("maven.modrinth:always-a-bigger-fish:${property("deps.bigger_fish")}")
+
     // Create
     compileOnly("maven.modrinth:create-fly:${property("deps.create")}")
 }

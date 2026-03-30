@@ -172,7 +172,6 @@ dependencies {
 
     implementation("cc.cassian.rrv:reliable-recipe-viewer-fabric:${property("deps.rrv")}") {
         exclude(group = "eu.pb4")
-
     }
 
     // Mod Menu
@@ -190,6 +189,7 @@ dependencies {
 
     compileOnly("maven.modrinth:create-deco:${property("deps.create_deco")}")
 
+    implementation("maven.modrinth:always-a-bigger-fish:${property("deps.bigger_fish")}")
 
     compileOnly("maven.modrinth:create-fly:${property("deps.create")}")
 }

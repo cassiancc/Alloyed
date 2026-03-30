@@ -1,8 +1,10 @@
 package com.molybdenum.alloyed.common.registry;
 
 import com.molybdenum.alloyed.Alloyed;
+import com.molybdenum.alloyed.common.compat.BiggerFishCompat;
 import com.molybdenum.alloyed.common.item.ModArmourMaterials;
 import com.molybdenum.alloyed.common.item.ModItemTiers;
+import com.molybdenum.alloyed.common.util.Platform;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -82,10 +84,10 @@ public class ModItems {
     );
 
 
-    public static final ItemEntry<ShearsItem> STEEL_SHEARS = registerItem("steel_shears", properties -> new ShearsItem(properties.component(DataComponents.TOOL, ShearsItem.createToolProperties()).durability(750)));
+    public static final ItemEntry<ShearsItem> STEEL_SHEARS = registerItem("steel_shears", properties -> new ShearsItem(properties.component(DataComponents.TOOL, ShearsItem.createToolProperties()).durability(750).repairable(ModTags.Items.STEEL_INGOT)));
 
 
-    public static final ItemEntry<FishingRodItem> STEEL_FISHING_ROD = registerItem("steel_fishing_rod", properties -> new FishingRodItem(properties.durability(512)));
+    public static final ItemEntry<Item> STEEL_FISHING_ROD = registerItem("steel_fishing_rod", properties -> registerFishingRod(properties.stacksTo(1).repairable(ModTags.Items.STEEL_INGOT)));
 
     // Steel Armour
     public static final ItemEntry<Item> STEEL_HELMET = registerItem("steel_helmet", properties -> new Item(properties.durability(330).humanoidArmor(ModArmourMaterials.STEEL, ArmorType.HELMET)));
@@ -129,5 +131,11 @@ public class ModItems {
 
     private static <T extends Item> ItemEntry<T> registerItem(String id, Function<Item.Properties, T> factory) {
         return registerItem(id, factory, new Item.Properties());
+    }
+
+    private static Item registerFishingRod(Item.Properties properties) {
+        if (Platform.isLoaded("bigger_fish"))
+            return BiggerFishCompat.registerFishingRod(properties);
+        return new FishingRodItem(properties.durability(512));
     }
 }

@@ -11,7 +11,7 @@ public class FDCompatItems {
             "steel_knife",
             properties -> Alloyed.isFarmersDelightLoaded ?
                     FarmersDelightCompat.newSteelKnife(properties) :
-                    new Item(properties.stacksTo(1)),
+                    new Item(properties.stacksTo(1).repairable(ModTags.Items.STEEL_INGOT)),
             new Item.Properties(),
             !Alloyed.isFarmersDelightLoaded
     );
