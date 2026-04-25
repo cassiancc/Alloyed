@@ -25,13 +25,7 @@ public class Alloyed {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final ModConfig CONFIG = ModConfig.createToml(Platform.getConfigDir(), "", MOD_ID, ModConfig.class);
 
-    // Compat
-    public static boolean isFarmersDelightLoaded = false;
-
     public static void init() {
-
-        isFarmersDelightLoaded = Platform.isLoaded("farmersdelight");
-
         //? neoforge
         /*NeoForgeMod.enableMilkFluid();*/
 
