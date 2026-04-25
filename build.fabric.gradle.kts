@@ -285,10 +285,9 @@ publishMods {
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api")
-        requires("create-fabric")
-        if (hasProperty("deps.emi")) {
-            optional("emi")
-        }
+        optional("rrv")
+        optional("mcqoy")
+
     }
 }
 
