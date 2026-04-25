@@ -53,7 +53,7 @@ public class ModItems {
 
     public static final ItemEntry<Item> STEEL_SWORD = registerItem(
             "steel_sword",
-            properties -> new SwordItem(ModItemTiers.STEEL, properties)
+            properties -> new SwordItem(ModItemTiers.STEEL, properties.attributes(SwordItem.createAttributes(ModItemTiers.STEEL, 3, -2.4F)))
     );
 
     public static final ItemEntry<Item> STEEL_SPEAR = registerSpear();
