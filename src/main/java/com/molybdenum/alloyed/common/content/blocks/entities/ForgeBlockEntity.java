@@ -2,7 +2,7 @@ package com.molybdenum.alloyed.common.content.blocks.entities;
 
 //? fabric {
 
-import it.unimi.dsi.fastutil.ints.IntList;
+
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 //?}
 import com.molybdenum.alloyed.common.handler.ItemStackHandler;
@@ -15,6 +15,7 @@ import com.molybdenum.alloyed.common.content.recipes.ModRecipes;
 import com.molybdenum.alloyed.common.registry.ModBlockEntities;
 import com.molybdenum.alloyed.common.screen.ForgeMenu;
 
+import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -69,12 +70,11 @@ public class ForgeBlockEntity extends BlockEntity implements
 			}
 		}
 
-		//? fabric {
 		@Override
 		public IntList getInputSlotIndexes() {
 			return IntList.of(0, 1, 2, 3, 4, 5, 6, 7, 8);
 		}
-		//?}
+
 	};
 
 
