@@ -18,6 +18,7 @@ public class ForgeScreen extends AbstractContainerScreen<ForgeMenu> {
 
 	@Override
 	public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+		super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
 		// Get the position where the GUI is to be drawn
 		int x = (width - imageWidth) / 2;
 		int y = (height - imageHeight) / 2;

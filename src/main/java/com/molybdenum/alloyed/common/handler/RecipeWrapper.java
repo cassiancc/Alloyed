@@ -69,17 +69,19 @@ public class RecipeWrapper implements RecipeInput {
 	}
 	//?} else {
 	/*private final ItemStackHandler handler;
+	private final ArrayList<ItemStack> stacks = new ArrayList<>();
 	public RecipeWrapper(ItemStackHandler handler) {
 		this.handler = handler;
 		this.stackedContents = new StackedItemContents();
 		int ingredientAmount = 0;
 
-		for (int i = 0; i < 9; i++) {
-			ItemStack itemstack = handler.getStackInSlot(i);
+		for (int value : handler.getInputSlotIndexes()) {
+			ItemStack itemstack = handler.getStackInSlot(value);
 			if (!itemstack.isEmpty()) {
 				++ingredientAmount;
 				this.stackedContents.accountStack(itemstack, 1);
 			}
+			this.stacks.add(itemstack);
 		}
 
 		this.ingredientAmount = ingredientAmount;
@@ -103,9 +105,6 @@ public class RecipeWrapper implements RecipeInput {
 	}
 
 	public List<ItemStack> stacks() {
-		//? neoforge
-		/*return this.handler.getSlots();*/
-		//? fabric
 		return stacks;
 	}
 }

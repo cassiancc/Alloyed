@@ -1,3 +1,11 @@
+## [3.0.4]
+
+### Added
+- When Always a Bigger Fish is present, Steel Fishing Rods now work as baited rods.
+
+### Fixed
+- Steel Knives, Shears, and Fishing Rods now have a repair ingredient.
+
 ## [3.0.3]
 
 ### Fixed
