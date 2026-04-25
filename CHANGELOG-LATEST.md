@@ -1,2 +1,7 @@
+### Added
+- Chinese translation (thanks @taguima!)
+
 ### Fixed
-- Crash without Create on NeoForge.
+- Steel knife not generating on NeoForge.
+- Steel swords not having attributes set.
+- Shaped forging on NeoForge.

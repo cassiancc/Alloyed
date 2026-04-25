@@ -1,3 +1,8 @@
+## [3.0.4]
+
+### Fixed
+- Crash without Create on NeoForge.
+
 ## [3.0.3]
 
 ### Fixed
