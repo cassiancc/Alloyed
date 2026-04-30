@@ -1,5 +1,5 @@
 {
   "values": [
-    "alloyed:steel_spear"
+    { "id": "alloyed:steel_spear", "required": false }
   ]
 }
