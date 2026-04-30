@@ -41,6 +41,11 @@ public class ForgingClientRecipeType implements ReliableClientRecipeType {
     }
 
     @Override
+    public int getPriority() {
+        return 5;
+    }
+
+    @Override
     public void placeSlots(RecipeViewMenu.SlotDefinition builder) {
         //ingredients
         builder.addItemSlot(0, 2, 3);

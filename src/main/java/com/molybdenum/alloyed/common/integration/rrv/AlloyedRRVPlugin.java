@@ -2,9 +2,12 @@ package com.molybdenum.alloyed.common.integration.rrv;
 
 import cc.cassian.rrv.api.ReliableRecipeViewerPlugin;
 import cc.cassian.rrv.api.recipe.ItemView;
+import cc.cassian.rrv.client.recipe.ClientRecipeCache;
+import cc.cassian.rrv.client.recipe.ClientRecipeManager;
 import cc.cassian.rrv.common.recipe.ServerRecipeManager;
 import cc.cassian.rrv.common.recipe.inventory.SlotContent;
 import com.molybdenum.alloyed.common.content.recipes.ModRecipes;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Collections;
@@ -14,12 +17,16 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 
 	@Override
 	public void onIntegrationInitialize() {
-		//server
-		ItemView.addServerRecipeProvider(recipeList -> {
-			ServerRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPELESS_FORGING_TYPE.get()).forEach(recipe -> {
-				recipeList.add(new ShapelessForgingServerRecipe(recipe.getIngredients(), recipe.getResultItem(), recipe.getCookTime()));
+		ServerRecipeManager.INSTANCE.synchronizeRecipeType(ModRecipes.SHAPELESS_FORGING_SERIALIZER.get(), ModRecipes.SHAPELESS_FORGING_TYPE.get());
+		ServerRecipeManager.INSTANCE.synchronizeRecipeType(ModRecipes.SHAPED_FORGING_SERIALIZER.get(), ModRecipes.SHAPED_FORGING_TYPE.get());
+
+		ItemView.addClientRecipeProvider(recipeList -> {
+			ClientRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPELESS_FORGING_TYPE.get()).forEach(recipeHolder -> {
+				var recipe = recipeHolder.value();
+				recipeList.add(new ForgingClientRecipe(recipe.getIngredients(), recipe.getResultItem(), recipe.getCookTime()));
 			});
-			ServerRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPED_FORGING_TYPE.get()).forEach(recipe -> {
+			ClientRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPED_FORGING_TYPE.get()).forEach(recipeHolder -> {
+				var recipe = recipeHolder.value();
 				HashMap<Integer, SlotContent> ingredients = new HashMap<>();
 
 				int i = 0;
@@ -36,13 +43,8 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 						i++;
 					}
 				}
-				recipeList.add(new ShapedForgingServerRecipe(recipe.getWidth(), recipe.getHeight(), ingredients, recipe.getResultItem(), recipe.getCookTime()));
+				recipeList.add(new ForgingClientRecipe(recipe.getWidth(), recipe.getHeight(), ingredients, recipe.getResultItem(), recipe.getCookTime()));
 			});
 		});
-
-		// client
-		ItemView.addClientRecipeWrapper(ShapelessForgingServerRecipe.TYPE, modRecipe -> Collections.singletonList(new ForgingClientRecipe(modRecipe)));
-		ItemView.addClientRecipeWrapper(ShapedForgingServerRecipe.TYPE, modRecipe -> Collections.singletonList(new ForgingClientRecipe(modRecipe)));
-
 	}
 }

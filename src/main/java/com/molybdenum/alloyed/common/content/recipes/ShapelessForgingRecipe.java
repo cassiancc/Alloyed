@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.molybdenum.alloyed.common.handler.RecipeWrapper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Recipe;
@@ -116,21 +117,19 @@ public class ShapelessForgingRecipe extends AbstractForgingRecipe {
 	public static StreamCodec<RegistryFriendlyByteBuf, ShapelessForgingRecipe> STREAM_CODEC =
 		StreamCodec.of(ShapelessForgingRecipe::toNetwork, ShapelessForgingRecipe::fromNetwork);
 
+	public static StreamCodec<RegistryFriendlyByteBuf, List<Ingredient>> INGREDIENT_LIST_STREAM_CODEC = Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list());
 
 	private static ShapelessForgingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-		int i = buffer.readVarInt();
-		NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.of());
-		inputItemsIn.replaceAll((ignored) -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
+		NonNullList<Ingredient> nonNull = NonNullList.create();
+		var items = INGREDIENT_LIST_STREAM_CODEC.decode(buffer);
+		nonNull.addAll(items);
 		ItemStackTemplate outputIn = ItemStackTemplate.STREAM_CODEC.decode(buffer);
 		int cookTimeIn = buffer.readVarInt();
-		return new ShapelessForgingRecipe(inputItemsIn, outputIn, cookTimeIn);
+		return new ShapelessForgingRecipe(nonNull, outputIn, cookTimeIn);
 	}
 
 	private static void toNetwork(RegistryFriendlyByteBuf buffer, ShapelessForgingRecipe recipe) {
-		buffer.writeVarInt(recipe.inputItems.size());
-		for (Ingredient ingredient : recipe.inputItems) {
-			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
-		}
+		INGREDIENT_LIST_STREAM_CODEC.encode(buffer, recipe.getIngredients());
 		ItemStackTemplate.STREAM_CODEC.encode(buffer, recipe.output);
 		buffer.writeVarInt(recipe.cookTime);
 	}

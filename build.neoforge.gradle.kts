@@ -31,13 +31,6 @@ jsonlang {
 
 repositories {
     maven {
-        name = "Parchment Mappings"
-        url = uri("https://maven.parchmentmc.org")
-        content {
-            includeGroupAndSubgroups("org.parchmentmc")
-        }
-    }
-    maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
         content {
@@ -110,12 +103,6 @@ neoForge {
     version = property("deps.neoforge") as String
     validateAccessTransformers = true
 
-    if (hasProperty("deps.parchment")) parchment {
-        val (mc, ver) = (property("deps.parchment") as String).split(':')
-        mappingsVersion = ver
-        minecraftVersion = mc
-    }
-
     runs {
         configureEach {
             systemProperty("neoforge.warnings.onlyin.hide", "true")
@@ -144,7 +131,7 @@ dependencies {
 
     implementation("cc.cassian.rrv:reliable-recipe-viewer-neoforge:${property("deps.rrv")}")
 
-    compileOnly("maven.local:FarmersDelight:${property("deps.fd")}+refabricated") {
+    compileOnly("maven.modrinth:farmers-delight-refabricated:${property("deps.fd")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "me.shedaniel")
     }

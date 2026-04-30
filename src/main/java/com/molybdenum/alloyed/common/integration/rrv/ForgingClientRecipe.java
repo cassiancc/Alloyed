@@ -11,10 +11,12 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,13 +32,13 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
     private final int width, height;
 
     @Override
-    public ForgingClientRecipeType getViewType() {
+    public ForgingClientRecipeType getType() {
         return ForgingClientRecipeType.INSTANCE;
     }
 
-    public ForgingClientRecipe(ShapelessForgingServerRecipe recipe) {
+    public ForgingClientRecipe(NonNullList<Ingredient> ingredients, ItemStack resultItem, int cookTime) {
         this.shapeless = true;
-        var size = recipe.getIngredients().size();
+        var size = ingredients.size();
         switch (size) {
             case 1:
                 this.width = 1;
@@ -66,20 +68,20 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
 
 
         AtomicInteger i = new AtomicInteger();
-        recipe.getIngredients().forEach((ingredient) -> {
-            this.ingredients.put(i.getAndIncrement(), ingredient);
+        ingredients.forEach((ingredient) -> {
+            this.ingredients.put(i.getAndIncrement(), SlotContent.of(ingredient));
         });
-        this.cookTime = recipe.getCookTime();
-        this.result = recipe.getResult();
+        this.cookTime = cookTime;
+        this.result = resultItem;
     }
 
-    public ForgingClientRecipe(ShapedForgingServerRecipe recipe) {
-		this.ingredients.putAll(recipe.getIngredients());
-        this.cookTime = recipe.getCookTime();
-        this.result = recipe.getResult();
+    public ForgingClientRecipe(int width, int height, HashMap<Integer, SlotContent> ingredients, ItemStack resultItem, int cookTime) {
+		this.ingredients.putAll(ingredients);
+        this.cookTime = cookTime;
+        this.result = resultItem;
         this.shapeless = false;
-        this.width = recipe.getWidth();
-        this.height = recipe.getHeight();
+        this.width = width;
+        this.height = height;
     }
 
     @Override

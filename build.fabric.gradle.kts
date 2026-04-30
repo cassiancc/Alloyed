@@ -35,13 +35,6 @@ jsonlang {
 
 repositories {
     maven {
-        name = "Parchment Mappings"
-        url = uri("https://maven.parchmentmc.org")
-        content {
-            includeGroupAndSubgroups("org.parchmentmc")
-        }
-    }
-    maven {
         name = "Modrinth"
         url = uri("https://api.modrinth.com/maven")
         content {
@@ -177,12 +170,7 @@ dependencies {
     // Mod Menu
     implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
-    implementation("com.github.Chocohead:Fabric-ASM:${property("deps.fabric_asm")}") {
-        exclude(group = "net.fabricmc")
-        exclude(group = "me.shedaniel")
-    }
-
-    compileOnly("maven.local:FarmersDelight:${property("deps.fd")}+refabricated") {
+    compileOnly("maven.modrinth:farmers-delight-refabricated:${property("deps.fd")}") {
         exclude(group = "net.fabricmc")
         exclude(group = "me.shedaniel")
     }
