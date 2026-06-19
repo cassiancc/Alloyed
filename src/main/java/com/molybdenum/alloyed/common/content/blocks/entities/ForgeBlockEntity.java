@@ -50,6 +50,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 		/*MenuProvider*/
 		, WorldlyContainer, StackedContentsCompatible {
 
+	private static final int RESULT_SLOT_INDEX = 10;
 	protected final ContainerData data;
 	private int progress = 0;
 	private int maxProgress = 72;
@@ -262,8 +263,9 @@ public class ForgeBlockEntity extends BlockEntity implements
 			inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
 		}
 
-		var currentRecipe = entity.currentRecipe;
+		AbstractForgingRecipe currentRecipe = entity.currentRecipe;
 		if (currentRecipe != null) {
+			ItemStack result = currentRecipe.assemble(new RecipeWrapper(entity.itemHandler));
 			for(int i = 0; i < 9; ++i) {
 				ItemStack slotStack = entity.itemHandler.getStackInSlot(i);
 				if (slotStack.getCraftingRemainder() != null) {
@@ -278,10 +280,12 @@ public class ForgeBlockEntity extends BlockEntity implements
 			for (int i = 0; i < 9; ++i) {
 				entity.itemHandler.extractItem(i, 1, false);
 			}
-			inventory.getItem(10).is(currentRecipe.getResultItem().getItem());
-
-			entity.itemHandler.setStackInSlot(10, new ItemStack(currentRecipe.getResultItem().getItem(),
-					entity.itemHandler.getStackInSlot(10).getCount() + entity.getTheCount(currentRecipe.getResultItem())));
+			ItemStack currentItemInResultSlot = entity.getItem(RESULT_SLOT_INDEX);
+			if (ItemStack.isSameItemSameComponents(currentItemInResultSlot, result)) {
+				entity.setItem(RESULT_SLOT_INDEX, currentItemInResultSlot.copyWithCount(currentItemInResultSlot.getCount() + result.count()));
+			} else {
+				entity.setItem(RESULT_SLOT_INDEX, result);
+			}
 
 			entity.resetProgress();
 

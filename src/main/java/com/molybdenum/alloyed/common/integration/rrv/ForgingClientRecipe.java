@@ -30,14 +30,16 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
     private final int cookTime;
     private final boolean shapeless;
     private final int width, height;
+    private final Identifier id;
 
     @Override
     public ForgingClientRecipeType getType() {
         return ForgingClientRecipeType.INSTANCE;
     }
 
-    public ForgingClientRecipe(NonNullList<Ingredient> ingredients, ItemStack resultItem, int cookTime) {
+    public ForgingClientRecipe(Identifier id, NonNullList<Ingredient> ingredients, ItemStack resultItem, int cookTime) {
         this.shapeless = true;
+        this.id = id;
         var size = ingredients.size();
         switch (size) {
             case 1:
@@ -75,13 +77,14 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
         this.result = resultItem;
     }
 
-    public ForgingClientRecipe(int width, int height, HashMap<Integer, SlotContent> ingredients, ItemStack resultItem, int cookTime) {
+    public ForgingClientRecipe(Identifier identifier, int width, int height, HashMap<Integer, SlotContent> ingredients, ItemStack resultItem, int cookTime) {
 		this.ingredients.putAll(ingredients);
         this.cookTime = cookTime;
         this.result = resultItem;
         this.shapeless = false;
         this.width = width;
         this.height = height;
+        this.id = identifier;
     }
 
     @Override
@@ -167,6 +170,11 @@ public class ForgingClientRecipe implements ReliableClientRecipe {
         transferMap.linkSlots(6, 42);
         transferMap.linkSlots(7, 43);
         transferMap.linkSlots(8, 44);
+    }
+
+    @Override
+    public Identifier getId() {
+        return id;
     }
 
     @Override

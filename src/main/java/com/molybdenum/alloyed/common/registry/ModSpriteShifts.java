@@ -4,9 +4,7 @@ import com.molybdenum.alloyed.Alloyed;
 import com.zurrtum.create.Create;
 import com.zurrtum.create.client.catnip.render.SpriteShiftEntry;
 import com.zurrtum.create.client.catnip.render.SpriteShifter;
-import com.zurrtum.create.client.foundation.block.connected.AllCTTypes;
-import com.zurrtum.create.client.foundation.block.connected.CTSpriteShiftEntry;
-import com.zurrtum.create.client.foundation.block.connected.CTSpriteShifter;
+import com.zurrtum.create.client.foundation.block.connected.*;
 
 import static com.zurrtum.create.client.foundation.block.connected.AllCTTypes.*;
 
@@ -45,7 +43,7 @@ public class ModSpriteShifts {
             OXIDIZED_BRONZE_CAP = ct(OMNIDIRECTIONAL, "oxidized_bronze_cap");
 
 
-    private static CTSpriteShiftEntry ct(AllCTTypes type, String name) {
+    private static CTSpriteShiftEntry ct(CTType type, String name) {
         return CTSpriteShifter.getCT(type,
                 Alloyed.asResource("block/" + name),
                 Alloyed.asResource("block/" + name + "_connected"));

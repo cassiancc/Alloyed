@@ -1,3 +1,5 @@
 ### Fixed
-- Background not rendering in Forge screen.
-- Shaped forging not working on NeoForge.
+- Bronze Pillar blocks not oxidizing.
+- Forges not outputing recipes with components.
+- RRV plugin not providing valid `Identifier`s.
+- Crash on startup with newer versions of Create Fly.

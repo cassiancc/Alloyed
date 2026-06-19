@@ -19,7 +19,7 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 		ItemView.addClientRecipeProvider(recipeList -> {
 			ClientRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPELESS_FORGING_TYPE.get()).forEach(recipeHolder -> {
 				var recipe = recipeHolder.value();
-				recipeList.add(new ForgingClientRecipe(recipe.getIngredients(), recipe.getResultItem(), recipe.getCookTime()));
+				recipeList.add(new ForgingClientRecipe(recipeHolder.id().identifier(), recipe.getIngredients(), recipe.getResultItem(), recipe.getCookTime()));
 			});
 			ClientRecipeManager.INSTANCE.getRecipesForType(ModRecipes.SHAPED_FORGING_TYPE.get()).forEach(recipeHolder -> {
 				var recipe = recipeHolder.value();
@@ -39,7 +39,7 @@ public class AlloyedRRVPlugin implements ReliableRecipeViewerPlugin {
 						i++;
 					}
 				}
-				recipeList.add(new ForgingClientRecipe(recipe.getWidth(), recipe.getHeight(), ingredients, recipe.getResultItem(), recipe.getCookTime()));
+				recipeList.add(new ForgingClientRecipe(recipeHolder.id().identifier(), recipe.getWidth(), recipe.getHeight(), ingredients, recipe.getResultItem(), recipe.getCookTime()));
 			});
 		});
 	}
