@@ -2,6 +2,7 @@
 - Chinese translation (thanks @taguima!)
 
 ### Fixed
-- Steel knife not generating on NeoForge.
-- Steel swords not having attributes set.
-- Shaped forging on NeoForge.
+- Bronze Pillar blocks not oxidizing.
+- Forges not outputing recipes with components.
+- RRV plugin not providing valid `Identifier`s.
+- Crash on startup with newer versions of Create Fly.

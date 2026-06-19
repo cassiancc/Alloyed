@@ -1,3 +1,9 @@
+## [3.0.9]
+
+### Fixed
+- Background not rendering in Forge screen.
+- Shaped forging not working on NeoForge.
+
 ## [3.0.4]
 
 ### Fixed

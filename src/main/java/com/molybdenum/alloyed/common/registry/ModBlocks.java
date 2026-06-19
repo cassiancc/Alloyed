@@ -91,6 +91,7 @@ public class ModBlocks {
             var block = registerBlock(id, (properties)-> new WeatheringRotatedPillarBlock(state, properties), ModBlocks.bronzeProperties());
             var waxedBlock = registerBlock("waxed_"+id, RotatedPillarBlock::new, ModBlocks.bronzeProperties());
             Platform.addWaxable(block.get(), waxedBlock.get());
+            ModBlocks.addWeathering(id, state, block);
             return List.of(block, waxedBlock);
         }
     }
@@ -99,16 +100,19 @@ public class ModBlocks {
         var block = registerCutBronze(id, state);
         var waxedBlock = registerBlock("waxed_"+id,(Block::new), Blocks.CUT_COPPER);
         Platform.addWeathering(block.get(), waxedBlock.get());
-        if (state.equals(WeatheringCopper.WeatherState.WEATHERED)) {
-            Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("weathered_", "exposed_"))), block.get());
-        }
-        if (state.equals(WeatheringCopper.WeatherState.EXPOSED)) {
-            Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("exposed_", ""))), block.get());
-        }
-        if (state.equals(WeatheringCopper.WeatherState.OXIDIZED)) {
-            Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("oxidized_", "weathered_"))), block.get());
-        }
+        addWeathering(id, state, block);
         return List.of(block, waxedBlock);
+    }
+
+    public static void addWeathering(String id, WeatheringCopper.WeatherState state, BlockEntry<?> block) {
+        switch (state) {
+            case WEATHERED ->
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("weathered_", "exposed_"))), block.get());
+            case EXPOSED ->
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("exposed_", ""))), block.get());
+            case OXIDIZED ->
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("oxidized_", "weathered_"))), block.get());
+        }
     }
 
     private static List<BlockEntry<? extends Block>> registerCutBronzeSet(String id, WeatheringCopper.WeatherState state) {

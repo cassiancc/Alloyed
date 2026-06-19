@@ -30,6 +30,7 @@ public class CreateCompat {
 	public static List<BlockEntry<? extends Block>> registerBronzePillarSet(String id, WeatheringCopper.WeatherState state) {
 		var block = registerBlock(id, (properties)-> new WeatheringBronzePillarBlock(state, properties), ModBlocks.bronzeProperties());
 		var waxedBlock = registerBlock("waxed_"+id, ConnectedPillarBlock::new, ModBlocks.bronzeProperties());
+		ModBlocks.addWeathering(id, state, block);
 		Platform.addWaxable(block.get(), waxedBlock.get());
 		return List.of(block, waxedBlock);
 	}
