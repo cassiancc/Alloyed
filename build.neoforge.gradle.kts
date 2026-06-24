@@ -218,6 +218,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         optional("mcqoy")
         optional("emi")
+        optional("create")
     }
 
     curseforge {

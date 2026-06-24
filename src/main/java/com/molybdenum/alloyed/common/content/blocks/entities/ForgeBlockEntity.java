@@ -266,7 +266,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 
 		AbstractForgingRecipe currentRecipe = entity.currentRecipe;
 		if (currentRecipe != null) {
-			ItemStack result = currentRecipe.assemble(new RecipeWrapper(entity.itemHandler));
+			ItemStack result = currentRecipe.assemble(new RecipeWrapper(entity.itemHandler), entity.level.registryAccess());
 			for(int i = 0; i < 9; ++i) {
 				ItemStack slotStack = entity.itemHandler.getStackInSlot(i);
 				if (remainder(slotStack) != null) {
@@ -283,7 +283,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 			}
 			ItemStack currentItemInResultSlot = entity.getItem(RESULT_SLOT_INDEX);
 			if (ItemStack.isSameItemSameComponents(currentItemInResultSlot, result)) {
-				entity.setItem(RESULT_SLOT_INDEX, currentItemInResultSlot.copyWithCount(currentItemInResultSlot.getCount() + result.count()));
+				entity.setItem(RESULT_SLOT_INDEX, currentItemInResultSlot.copyWithCount(currentItemInResultSlot.getCount() + result.getCount()));
 			} else {
 				entity.setItem(RESULT_SLOT_INDEX, result);
 			}

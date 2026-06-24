@@ -1,6 +1,7 @@
 package com.molybdenum.alloyed.common.content.recipes;
 
 import com.molybdenum.alloyed.common.handler.RecipeWrapper;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -27,4 +28,6 @@ public abstract class AbstractForgingRecipe implements Recipe<RecipeWrapper> {
 	public boolean showNotification() {
 		return false;
 	}
+
+	public abstract ItemStack assemble(RecipeWrapper input, HolderLookup.Provider registries);
 }

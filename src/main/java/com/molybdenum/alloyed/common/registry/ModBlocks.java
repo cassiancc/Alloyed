@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,8 +59,10 @@ public class ModBlocks {
     public static final BlockEntry<TrapDoorBlock> STEEL_TRAPDOOR = registerBlock("steel_trapdoor", properties -> new TrapDoorBlock(ModBlockSetTypes.STEEL, properties), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR));
 
     public static final BlockEntry<FenceBlock> STEEL_MESH_FENCE = registerBlock("steel_mesh_fence", FenceBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.CHAIN), true, !Platform.isLoaded("createdeco"));
-    public static final BlockEntry<ForgeBlock> FORGE = registerBlock("forge", ForgeBlock::new);
-
+    public static final BlockEntry<ForgeBlock> FORGE = registerBlock("forge", ForgeBlock::new, BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(4f).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().lightLevel(state->{
+        if (state.getValue(ForgeBlock.LIT)) return 13;
+        return 0;
+    }));
 
     public static void register() {
         Alloyed.LOGGER.debug("Registering ModBlocks!");
@@ -107,11 +110,11 @@ public class ModBlocks {
     public static void addWeathering(String id, WeatheringCopper.WeatherState state, BlockEntry<?> block) {
         switch (state) {
             case WEATHERED ->
-                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("weathered_", "exposed_"))), block.get());
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("weathered_", "exposed_"))), block.get());
             case EXPOSED ->
-                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("exposed_", ""))), block.get());
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("exposed_", ""))), block.get());
             case OXIDIZED ->
-                    Platform.addWeathering(BuiltInRegistries.BLOCK.getValue(Alloyed.asResource(id.replace("oxidized_", "weathered_"))), block.get());
+                    Platform.addWeathering(BuiltInRegistries.BLOCK.get(Alloyed.asResource(id.replace("oxidized_", "weathered_"))), block.get());
         }
     }
 

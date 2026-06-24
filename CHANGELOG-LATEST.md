@@ -1,8 +1,7 @@
-### Added
-- Chinese translation (thanks @taguima!)
-
 ### Fixed
 - Bronze Pillar blocks not oxidizing.
 - Forges not outputing recipes with components.
-- RRV plugin not providing valid `Identifier`s.
-- Crash on startup with newer versions of Create Fly.
+- Forge not requiring a tool.
+- Forge not emitting light.
+- Incorrectly assigned armor materials.
+- Missing block and item tags (thanks @doonv!).
