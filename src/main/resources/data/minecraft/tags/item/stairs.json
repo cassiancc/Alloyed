@@ -1,5 +1,17 @@
 {
   "values": [
-    "alloyed:steel_sheet_stairs"
+    "alloyed:steel_sheet_stairs",
+    "alloyed:cut_bronze_stairs",
+    "alloyed:cut_exposed_bronze_stairs",
+    "alloyed:cut_weathered_bronze_stairs",
+    "alloyed:cut_oxidized_bronze_stairs",
+    "alloyed:waxed_cut_bronze_stairs",
+    "alloyed:waxed_cut_exposed_bronze_stairs",
+    "alloyed:waxed_cut_weathered_bronze_stairs",
+    "alloyed:waxed_cut_oxidized_bronze_stairs",
+    {
+      "id": "alloyed:steel_catwalk_stairs",
+      "required": false
+    }
   ]
 }

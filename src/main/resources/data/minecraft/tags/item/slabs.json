@@ -1,5 +1,17 @@
 {
   "values": [
-    "alloyed:steel_sheet_slab"
+    "alloyed:steel_sheet_slab",
+    "alloyed:cut_bronze_slab",
+    "alloyed:cut_exposed_bronze_slab",
+    "alloyed:cut_weathered_bronze_slab",
+    "alloyed:cut_oxidized_bronze_slab",
+    "alloyed:waxed_cut_bronze_slab",
+    "alloyed:waxed_cut_exposed_bronze_slab",
+    "alloyed:waxed_cut_weathered_bronze_slab",
+    "alloyed:waxed_cut_oxidized_bronze_slab",
+    {
+      "id": "alloyed:steel_sheet_vertical_slab",
+      "required": false
+    }
   ]
 }
