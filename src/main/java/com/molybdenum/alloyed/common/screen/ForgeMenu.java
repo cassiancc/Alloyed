@@ -48,7 +48,7 @@ public class ForgeMenu extends AbstractContainerMenu {
 		this.addSlot(new ModInputSlot(handler, 6, 30, 53));    // Slot 6
 		this.addSlot(new ModInputSlot(handler, 7, 48, 53));    // Slot 7
 		this.addSlot(new ModInputSlot(handler, 8, 66, 53));    // Slot 8
-		this.addSlot(new ModFuelSlot(handler, 9, 93, 53));  // Fuel slot
+		this.addSlot(new ModFuelSlot(handler, level.fuelValues(), 9, 93, 53));  // Fuel slot
 		this.addSlot(new ModResultSlot(handler, 10, 124, 18));  // Output slot
 
 		// inventory

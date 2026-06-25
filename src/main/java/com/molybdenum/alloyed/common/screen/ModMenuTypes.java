@@ -12,10 +12,10 @@ import java.util.function.Supplier;
 
 public class ModMenuTypes {
 	//? fabric
-	public static final Supplier<MenuType<ForgeMenu>> FORGE_MENU = CommonRegistry.registerMenu("oven", () -> new ExtendedMenuType<>(ForgeMenu::new, BlockPos.STREAM_CODEC));
+	public static final Supplier<MenuType<ForgeMenu>> FORGE_MENU = CommonRegistry.registerMenu("forge", () -> new ExtendedMenuType<>(ForgeMenu::new, BlockPos.STREAM_CODEC));
 
 	//? neoforge
-	/*public static final Supplier<MenuType<ForgeMenu>> FORGE_MENU = CommonRegistry.registerMenu("oven", () -> IMenuTypeExtension.create((ForgeMenu::new)));*/
+	/*public static final Supplier<MenuType<ForgeMenu>> FORGE_MENU = CommonRegistry.registerMenu("forge", () -> IMenuTypeExtension.create((ForgeMenu::new)));*/
 
 	public static void register() {
 

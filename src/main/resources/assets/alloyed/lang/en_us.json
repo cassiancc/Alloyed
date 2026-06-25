@@ -113,6 +113,7 @@
   "tag.item.c.storage_blocks.steel": "Steel Blocks",
   "tag.item.alloyed.bronze_instruments": "Bronze Instruments",
   "block.alloyed.forge": "Alloy Forge",
+  "container.alloyed.forge": "Alloy Forge",
   "recipe.alloyed.forging": "Alloy Forging",
   "rrv.cooking.time": "%s seconds",
   "rrv.cooking.furnace_fuel": "Furnace Fuel",

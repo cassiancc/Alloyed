@@ -1,3 +1,11 @@
+## [3.0.10]
+
+### Fixed
+- Bronze Pillar blocks not oxidizing.
+- Forges not outputing recipes with components.
+- RRV plugin not providing valid `Identifier`s.
+- Crash on startup with newer versions of Create Fly.
+
 ## [3.0.9]
 
 ### Fixed

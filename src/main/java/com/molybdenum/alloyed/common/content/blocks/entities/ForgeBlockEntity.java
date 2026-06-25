@@ -34,6 +34,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -110,7 +111,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("block.alloyed.forge");
+		return Component.translatable("container.alloyed.forge");
 	}
 
 	@Nullable
@@ -253,7 +254,11 @@ public class ForgeBlockEntity extends BlockEntity implements
 	}
 
 	public static boolean isFuel(Level level, ItemStack fuel) {
-		return level.fuelValues().isFuel(fuel);
+		return isFuel(level.fuelValues(), fuel);
+	}
+
+	public static boolean isFuel(FuelValues level, ItemStack fuel) {
+		return level.isFuel(fuel);
 	}
 
 	private static void craftItem(ForgeBlockEntity entity) {
