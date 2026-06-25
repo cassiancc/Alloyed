@@ -1,7 +1,5 @@
+### Changed
+- Added a separate translation key for the Forge's menu.
+
 ### Fixed
-- Bronze Pillar blocks not oxidizing.
-- Forges not outputing recipes with components.
-- Forge not requiring a tool.
-- Forge not emitting light.
-- Incorrectly assigned armor materials.
-- Missing block and item tags (thanks @doonv!).
+- Crash on dedicated servers.

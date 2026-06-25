@@ -41,7 +41,7 @@ public class ForgeBlock extends BaseEntityBlock {
 
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return null;
+		return simpleCodec(ForgeBlock::new);
 	}
 
 	/* FACING */

@@ -111,7 +111,7 @@ public class ForgeBlockEntity extends BlockEntity implements
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("block.alloyed.forge");
+		return Component.translatable("container.alloyed.forge");
 	}
 
 	@Nullable
