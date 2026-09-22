@@ -6,9 +6,12 @@ import net.fabricmc.loader.api.FabricLoader;
 //?} else {
 /*import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.LoadingModList;
 *///?}
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
+
+
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
@@ -17,7 +20,7 @@ public class Platform {
 		//? fabric
 		return FabricLoader.getInstance().isModLoaded(mod);
 		//? neoforge
-		/*return ModList.get().isLoaded(mod);*/
+		/*return LoadingModList.get().getModFileById(mod) != null;*/
 	}
 
 	public static void addWaxable(Block block, Block waxedBlock) {

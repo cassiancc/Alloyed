@@ -35,6 +35,7 @@ public class EncasingHelper {
 
     public static ItemInteractionResult tryEncase(EncaseType type, BlockState state, Level level, BlockPos pos, ItemStack heldItem, Player player, InteractionHand hand,
                                                   BlockHitResult ray) {
+
         if (CreateAlloyedBlocks.STEEL_CASING.isIn(heldItem))
             return tryEncaseWithSteel(type, state, level, pos,  heldItem, player, hand, ray);
         if (CreateAlloyedBlocks.BRONZE_CASING.isIn(heldItem))
