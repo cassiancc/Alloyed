@@ -3,5 +3,6 @@
   "textures": {
     "edge": "alloyed:block/steel_bars/post",
     "particle": "alloyed:block/steel_bars/post"
-  }
+  },
+  "render_type":"translucent"
 }

@@ -4,5 +4,6 @@
     "bars": "alloyed:block/steel_bars/block",
     "edge": "alloyed:block/steel_bars/post",
     "particle": "alloyed:block/steel_bars/post"
-  }
+  },
+  "render_type":"translucent"
 }
