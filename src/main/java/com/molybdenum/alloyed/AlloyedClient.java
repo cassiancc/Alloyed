@@ -1,5 +1,6 @@
 package com.molybdenum.alloyed;
 
+import com.molybdenum.alloyed.client.registry.ModItemProperties;
 import com.molybdenum.alloyed.client.registry.ModPartialModels;
 import com.molybdenum.alloyed.client.registry.ModTransformers;
 import com.molybdenum.alloyed.client.screen.ForgeScreen;
@@ -21,5 +22,6 @@ public class AlloyedClient {
         if (Platform.isLoaded("create")) {
 			CreateCompat.registerPonders();
 		}
+		ModItemProperties.register();
     }
 }
