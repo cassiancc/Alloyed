@@ -37,6 +37,7 @@ public class ForgeBlock extends BaseEntityBlock {
 
 	public ForgeBlock(Properties properties) {
 		super(properties);
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
 	}
 
 	@Override
