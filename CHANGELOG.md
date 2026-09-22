@@ -1,3 +1,11 @@
+## [3.0.11]
+
+### Changed
+- Added a separate translation key for the Forge's menu.
+
+### Fixed
+- Crash on dedicated servers.
+
 ## [3.0.10]
 
 ### Fixed

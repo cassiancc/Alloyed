@@ -1,5 +1,9 @@
-### Changed
-- Added a separate translation key for the Forge's menu.
+### Added
+- Russian translation (thanks @shndrx!)
+- Turkish translation (thanks @Zeynep!)
 
 ### Fixed
-- Crash on dedicated servers.
+- Fishing rod model not changing on 1.21.1.
+- Encasing not working on NeoForge.
+- Transparency issues on NeoForge.
+- Lighting issues with LambDynamicLights.
