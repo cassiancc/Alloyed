@@ -1,5 +1,8 @@
-### Changed
-- Added a separate translation key for the Forge's menu.
+### Added
+- Russian translation (thanks @shndrx!)
+- Turkish translation (thanks @Zeynep!)
 
 ### Fixed
-- Crash on dedicated servers.
+- Encasing not working on NeoForge.
+- Transparency issues on NeoForge.
+- Lighting issues with LambDynamicLights.

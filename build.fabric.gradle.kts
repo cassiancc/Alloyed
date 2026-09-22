@@ -247,7 +247,6 @@ val additionalVersions: List<String> = additionalVersionsStr
 
 publishMods {
     file = tasks.jar.map { it.archiveFile.get() }
-    additionalFiles.from(tasks.named<org.gradle.jvm.tasks.Jar>("sourcesJar").map { it.archiveFile.get() })
 
     type = STABLE
     displayName = "${property("mod.name")} ${property("mod.version")} for ${stonecutter.current.version} Fabric"
@@ -256,6 +255,9 @@ publishMods {
     modLoaders.add("fabric")
 
     modrinth {
+        additionalFile(tasks.named<org.gradle.jvm.tasks.Jar>("sourcesJar")) {
+            type.set(SOURCES_JAR)
+        }
         projectId = property("publish.modrinth") as String
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
@@ -275,7 +277,8 @@ publishMods {
         requires("fabric-api")
         optional("rrv")
         optional("mcqoy")
-
+        client=true
+        server=true
     }
 }
 
