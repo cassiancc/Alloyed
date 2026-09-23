@@ -26,6 +26,10 @@ import static com.molybdenum.alloyed.Alloyed.MOD_ID;
 
 @SuppressWarnings({"unused"})
 public class ModBlocks {
+    static Block CUT_COPPER = Blocks.CUT_COPPER
+            //? if >=26.2
+            .weathering().unaffected();
+    ;
     // BRONZE
     public static final List<BlockEntry<? extends Block>> BRONZE_BLOCK = registerBronzeSet("bronze_block", WeatheringCopper.WeatherState.UNAFFECTED);
     public static final List<BlockEntry<? extends Block>> EXPOSED_BRONZE_BLOCK = registerBronzeSet("exposed_bronze_block", WeatheringCopper.WeatherState.EXPOSED);
@@ -115,7 +119,7 @@ public class ModBlocks {
 
     private static List<BlockEntry<? extends Block>> registerBronzeSet(String id, WeatheringCopper.WeatherState state) {
         var block = registerCutBronze(id, state);
-        var waxedBlock = registerBlock("waxed_"+id,(Block::new), Blocks.CUT_COPPER);
+        var waxedBlock = registerBlock("waxed_"+id,(Block::new), CUT_COPPER);
         Platform.addWeathering(block.get(), waxedBlock.get());
         addWeathering(id, state, block);
         return List.of(block, waxedBlock);
@@ -136,10 +140,10 @@ public class ModBlocks {
         var block = registerCutBronze(id, state);
         var stairs = registerCutBronzeStairs(id, state);
         var slab = registerCutBronzeSlab(id, state);
-        var waxedBlock = registerBlock("waxed_"+id,(Block::new), Blocks.CUT_COPPER);
+        var waxedBlock = registerBlock("waxed_"+id,(Block::new), CUT_COPPER);
         var waxedStairs = registerBlock("waxed_"+id+"_stairs", properties ->
-                new WeatheringCopperStairBlock(state, Blocks.BRICK_STAIRS.defaultBlockState(), properties), Blocks.CUT_COPPER);
-        var waxedSlab = registerBlock("waxed_"+id+"_slab", SlabBlock::new, Blocks.CUT_COPPER);
+                new WeatheringCopperStairBlock(state, Blocks.BRICK_STAIRS.defaultBlockState(), properties), CUT_COPPER);
+        var waxedSlab = registerBlock("waxed_"+id+"_slab", SlabBlock::new, CUT_COPPER);
         Platform.addWaxable(block.get(), waxedBlock.get());
         Platform.addWaxable(stairs.get(), waxedStairs.get());
         Platform.addWaxable(slab.get(), waxedSlab.get());
@@ -164,16 +168,16 @@ public class ModBlocks {
     }
 
     private static BlockEntry<? extends Block> registerCutBronze(String id, WeatheringCopper.WeatherState state) {
-        return registerBlock(id,(properties -> new WeatheringCopperFullBlock(state, properties)), Blocks.CUT_COPPER);
+        return registerBlock(id,(properties -> new WeatheringCopperFullBlock(state, properties)), CUT_COPPER);
     }
 
     private static BlockEntry<? extends SlabBlock> registerCutBronzeSlab(String id, WeatheringCopper.WeatherState state) {
-        return registerBlock(id+"_slab", (p)-> new WeatheringCopperSlabBlock(state, p), Blocks.CUT_COPPER);
+        return registerBlock(id+"_slab", (p)-> new WeatheringCopperSlabBlock(state, p), CUT_COPPER);
     }
 
     private static BlockEntry<WeatheringCopperStairBlock> registerCutBronzeStairs(String id, WeatheringCopper.WeatherState state) {
         return registerBlock(id+"_stairs", properties ->
-                new WeatheringCopperStairBlock(state, Blocks.BRICK_STAIRS.defaultBlockState(), properties), Blocks.CUT_COPPER);
+                new WeatheringCopperStairBlock(state, Blocks.BRICK_STAIRS.defaultBlockState(), properties), Blocks.CUT_COPPER.weathering().unaffected());
     }
 
     private static BlockEntry<SteelDoorBlock> steelDoorBlock(boolean locked, BlockEntry<SteelDoorBlock> normalDoor) {
