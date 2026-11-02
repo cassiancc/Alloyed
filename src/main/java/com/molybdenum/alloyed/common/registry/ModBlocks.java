@@ -84,9 +84,6 @@ public class ModBlocks {
         return bronzeProperties(BlockBehaviour.Properties.of());
     }
 
-    public static void fixBronzeBlocks() {
-    }
-
     public static List<BlockEntry<? extends Block>> registerBronzePillarSet(String id, WeatheringCopper.WeatherState state) {
         if (Platform.isLoaded("create")) {
             return CreateCompat.registerBronzePillarSet(id, state);
@@ -102,7 +99,6 @@ public class ModBlocks {
     private static List<BlockEntry<? extends Block>> registerBronzeSet(String id, WeatheringCopper.WeatherState state) {
         var block = registerCutBronze(id, state);
         var waxedBlock = registerBlock("waxed_"+id,(Block::new), Blocks.CUT_COPPER);
-        Platform.addWeathering(block.get(), waxedBlock.get());
         addWeathering(id, state, block);
         return List.of(block, waxedBlock);
     }
