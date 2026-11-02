@@ -1,5 +1,17 @@
 {
   "values": {
+    "alloyed:bronze_block": {
+      "waxed": "alloyed:waxed_bronze_block"
+    },
+    "alloyed:exposed_bronze_block": {
+      "waxed": "alloyed:waxed_exposed_bronze_block"
+    },
+    "alloyed:weathered_bronze_block": {
+      "waxed": "alloyed:waxed_weathered_bronze_block"
+    },
+    "alloyed:oxidized_bronze_block": {
+      "waxed": "alloyed:waxed_oxidized_bronze_block"
+    },
     "alloyed:cut_bronze": {
       "waxed": "alloyed:waxed_cut_bronze"
     },
